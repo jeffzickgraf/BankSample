@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 namespace BankProject.Accounts
 {
     /// <summary>
-    /// Represents a personal account.
+    /// Represents a business account.
     /// </summary>
-    public class PersonalAccount : AccountBase
+    public class BusinessAccount : AccountBase
     {
-        private decimal _balance;
-        
+		private decimal _balance;
+
 		/// <summary>
-		/// Constructor for a Personal Account.
+		/// Constructor for a Business Account.
 		/// </summary>
 		/// <param name="accountNumber">The account number.</param>
 		/// <param name="accountOwner">The account owner.</param>
 		/// <param name="balance">The initial balance.</param>
 		/// <param name="rules">Transaction rules for the account type.</param>
-        public PersonalAccount(int accountNumber, string accountOwner, decimal balance, ITransactionAccountRules rules)
-        {
-            AccountOwner = accountOwner;
-            AccountNumber = accountNumber;
-            _balance = balance;
+		public BusinessAccount(int accountNumber, string accountOwner, decimal balance, ITransactionAccountRules rules)
+		{
+			AccountOwner = accountOwner;
+			AccountNumber = accountNumber;
+			_balance = balance;
 			Overdrafts = new List<decimal>();
 			AccountRules = rules;
 		}
@@ -40,17 +40,17 @@ namespace BankProject.Accounts
 		/// The Balance for the account.
 		/// </summary>
 		public override decimal Balance
-        {
-            get { return _balance; }
-        }
+		{
+			get { return _balance; }
+		}
 
 		/// <summary>
 		/// Sets the balance for the account.
 		/// </summary>
 		/// <param name="balance">The amount to set.</param>
-        protected override void SetBalance(decimal balance)
-        {
-            _balance = balance;
-        }
-    }
+		protected override void SetBalance(decimal balance)
+		{
+			_balance = balance;
+		}
+	}
 }

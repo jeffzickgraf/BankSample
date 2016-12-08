@@ -27,5 +27,10 @@ namespace BankProject.Accounts.AccountRules
         {
             get { throw new NotImplementedException(); }
         }
-    }
+
+		public decimal TransactionFee
+		{
+			get	{throw new NotImplementedException(); }
+		}
+	}
 }

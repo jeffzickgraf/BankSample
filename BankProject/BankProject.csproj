@@ -45,8 +45,10 @@
     <Compile Include="Accounts\AccountRules\ITransactionAccountRules.cs" />
     <Compile Include="Accounts\AccountRules\PersonalAccountTransactionRules.cs" />
     <Compile Include="Accounts\IAccount.cs" />
+    <Compile Include="Accounts\BusinessAccount.cs" />
     <Compile Include="Accounts\PersonalAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction\TransactionManager.cs" />
     <Compile Include="Transaction\TransactionStatus.cs" />
     <Compile Include="Transaction\WithdrawalStatus.cs" />
   </ItemGroup>

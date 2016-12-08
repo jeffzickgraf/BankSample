@@ -11,7 +11,20 @@ namespace BankProject.Transaction
     /// </summary>
     public class WithdrawalStatus
     {
+		public WithdrawalStatus(bool succeeded, string failureReason)
+		{
+			WithdrawalSucceeded = succeeded;
+			FailureReason = failureReason;
+		}
+		
+		/// <summary>
+		/// Indicates if the withdrawal was successful.
+		/// </summary>
         public bool WithdrawalSucceeded { get; set; }
+
+		/// <summary>
+		/// If the withdrawal failed, the reason why.
+		/// </summary>
         public string FailureReason { get; set; }
     }
 }

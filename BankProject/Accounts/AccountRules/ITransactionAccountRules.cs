@@ -14,6 +14,7 @@ namespace BankProject.Accounts.AccountRules
     public interface ITransactionAccountRules
     {
        bool ShouldChargeTransactionFee { get; }
+	   decimal TransactionFee { get; }
        bool ShouldAllowOverdrafts { get; }
        decimal OverdraftFee { get; }
        decimal OverdraftAllowance { get; }

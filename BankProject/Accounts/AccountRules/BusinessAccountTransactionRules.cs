@@ -42,5 +42,13 @@ namespace BankProject.Accounts.AccountRules
                 return 1000m;
             }
         }
-    }
+
+		public decimal TransactionFee
+		{
+			get
+			{
+				return 1.00m;
+			}
+		}
+	}
 }
