@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankProject.Accounts.AccountRules
 {
-    public class PersonalAccountTransactionRules : ITransactionAccountRules
+	public class PersonalAccountTransactionRules : ITransactionAccountRules
     {
         public bool ShouldChargeTransactionFee
         {
