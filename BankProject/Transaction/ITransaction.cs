@@ -10,12 +10,12 @@ namespace BankProject.Transaction
 		/// <summary>
 		/// The destination account for the transaction ammount.
 		/// </summary>
-		AccountBase DestinationAccount { get; set; }
+		IAccount DestinationAccount { get; set; }
 		
 		/// <summary>
 		/// The Source account for the transaction.
 		/// </summary>
-		AccountBase SourceAccount { get; set; }
+		IAccount SourceAccount { get; set; }
 
 		/// <summary>
 		/// The transaction amount.

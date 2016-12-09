@@ -8,9 +8,19 @@ namespace BankProject.Transaction
 	/// </summary>
 	public interface ITransactionProcessor
 	{
+		/// <summary>
+		/// The list of all accounts.
+		/// </summary>
 		IList<IAccount> Accounts { get; set; }
+
+		/// <summary>
+		/// The Transactions to be processed.
+		/// </summary>
 		IList<ITransaction> Transactions { get; set; }
+
+		/// <summary>
+		/// Processes all transactions.
+		/// </summary>
 		void ProcessTransactions();
-		void Transact(ITransaction transaction);
 	}
 }

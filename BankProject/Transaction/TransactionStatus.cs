@@ -11,7 +11,25 @@ namespace BankProject.Transaction
     /// </summary>
     public class TransactionStatus
     {
+		/// <summary>
+		/// Instantiates a transaction status.
+		/// </summary>
+		/// <param name="succeeded">Indication of whether the transaction succeeded or failed.</param>
+		/// <param name="error">Leave empty if succeeded, if failed add error reason.</param>
+		public TransactionStatus(bool succeeded, string error = "")
+		{
+			TransactionSucceeded = succeeded;
+			Error = error;
+		}
+
+		/// <summary>
+		/// Indicates success or failure of the transaction.
+		/// </summary>
         public bool TransactionSucceeded { get; set; }
+
+		/// <summary>
+		/// If failure indicates why the transaction was not successful.
+		/// </summary>
         public string Error { get; set; }
 
     }

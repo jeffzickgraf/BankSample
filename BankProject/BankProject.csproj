@@ -40,18 +40,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounts\AccountBase.cs" />
+    <Compile Include="Accounts\AccountLoader.cs" />
     <Compile Include="Accounts\AccountFactory.cs" />
+    <Compile Include="Accounts\AccountLoadError.cs" />
     <Compile Include="Accounts\AccountRules\BusinessAccountTransactionRules.cs" />
     <Compile Include="Accounts\AccountRules\ITransactionAccountRules.cs" />
     <Compile Include="Accounts\AccountRules\PersonalAccountTransactionRules.cs" />
     <Compile Include="Accounts\IAccount.cs" />
     <Compile Include="Accounts\BusinessAccount.cs" />
+    <Compile Include="Accounts\IAccountFactory.cs" />
     <Compile Include="Accounts\PersonalAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction\ITransaction.cs" />
     <Compile Include="Transaction\ITransactionProcessor.cs" />
     <Compile Include="Transaction\Transaction.cs" />
-    <Compile Include="Transaction\TransactionDataReader.cs" />
+    <Compile Include="Transaction\TransactionLoader.cs" />
     <Compile Include="Transaction\TransactionProcessor.cs" />
     <Compile Include="Transaction\TransactionStatus.cs" />
     <Compile Include="Transaction\WithdrawalStatus.cs" />

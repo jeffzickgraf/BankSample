@@ -14,7 +14,7 @@ namespace BankProject.Transaction
 		/// <param name="destinationAccount">The destination account for the transaction.</param>
 		/// <param name="transactionAmount">The transaction ammount.</param>
 		/// <param name="transactionString">The string data from the input of transactions.</param>
-		public Transaction(AccountBase sourceAccount, AccountBase destinationAccount, decimal transactionAmount, string transactionString)
+		public Transaction(IAccount sourceAccount, IAccount destinationAccount, decimal transactionAmount, string transactionString)
 		{
 			SourceAccount = sourceAccount;
 			DestinationAccount = destinationAccount;
@@ -39,12 +39,12 @@ namespace BankProject.Transaction
 		/// <summary>
 		/// The destination account for the transaction ammount.
 		/// </summary>
-		public AccountBase DestinationAccount { get; set; }
+		public IAccount DestinationAccount { get; set; }
 
 		/// <summary>
 		/// The Source account for the transaction.
 		/// </summary>
-		public AccountBase SourceAccount { get; set; }
+		public IAccount SourceAccount { get; set; }
 
 		/// <summary>
 		/// The transaction amount.

@@ -10,18 +10,19 @@ namespace BankProject.Accounts
     /// <summary>
     /// Factory to create accounts from initial file load.
     /// </summary>
-    public class AccountFactory 
-    {
+    public class AccountFactory : IAccountFactory
+	{
 		/// <summary>
-		/// Initializes an account based on the account type.
+		/// Creates an account based on account type and assigns any needed values to the account for initialization.
 		/// </summary>
-		/// <param name="accountType">String representation of the account type.</param>
+		/// <param name="accountType">The account type.</param>
 		/// <param name="accountNumber">The account number.</param>
 		/// <param name="accountOwner">The account owner.</param>
-		/// <param name="initialBalance">The initial balance for the account.</param>
-		/// <returns></returns>
-        public AccountBase CreateAccount(string accountType, int accountNumber, string accountOwner, decimal initialBalance)
-        {
+		/// <param name="initialBalance">The initial balance.</param>
+		/// <returns>Creates a concrete type account based on: <see cref="AccountBase"/></returns>
+		/// <exception cref="ArgumentOutOfRangeException">Will throw if account type is unknown.</exception>		
+		public AccountBase CreateAccount(string accountType, int accountNumber, string accountOwner, decimal initialBalance)
+        {			
             switch (accountType)
             {
                 case "Personal":

@@ -1,41 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BankProject.Transaction;
 using BankProject.Accounts.AccountRules;
 
 namespace BankProject.Accounts
 {
-    /// <summary>
-    /// Base class for accounts. DRY principle - trying to consolidate as much logic that is not divergent as possible.
-    /// Also a way to push down required differentiators to our concrete classes where things must vary.
-    /// </summary>
-    public abstract class AccountBase : IAccount 
-    {
-        private int _accountNumber;
-		
+	/// <summary>
+	/// Base class for accounts. DRY principle - trying to consolidate as much logic that is not divergent as possible.
+	/// Also a way to push down required differentiators to our concrete classes where things must vary.
+	/// </summary>
+	public abstract class AccountBase : IAccount 
+    {		
         /// <summary>
         /// Customer account number.
         /// </summary>                
-        public int AccountNumber 
-        { 
-            get{ return _accountNumber; }
-            set 
-            {
-                //Always better to have the conditional on the most likely satisfied expression
-                if (value < 1000000)
-                {
-                    _accountNumber = value;
-                }
-                else
-                {
-                    //Could create a customized exception if desired here dereived from base exception.
-                    throw new ArgumentOutOfRangeException("AccountNumber", "Account number can be no larger than 1000000");
-                }
-            } 
-        }
+        public int AccountNumber { get; set; } 
 
 		/// <summary>
 		/// Running list of overdrafts 
@@ -51,20 +31,21 @@ namespace BankProject.Accounts
 
         /// <summary>
         /// Gets the balance for the account.  
-        /// ---Note: don't want to expose a way to set balance by anyone since its so important- so can't have public setter in base class
+        /// ---Note: don't want to expose a way to set balance by anyone since its so important- so didn't want a public setter in base class
         /// </summary>
         public abstract decimal Balance { get; }
 
 		/// <summary>
-		/// Force concrete instance to provide rules definition.
+		/// Force concrete instance to provide rules definition. ---Note: Allows for quick changes to 
+		/// rules that could fluctuate depending on market conditions without having to rewrite logic for all concrete classes.
 		/// </summary>
 		public abstract ITransactionAccountRules AccountRules { get; set; }
 
 		/// <summary>
 		/// Set the balance.
 		/// </summary>
-		/// <param name="balance"></param>
-		protected abstract void SetBalance(decimal balance);
+		/// <param name="balance">The balance to set.</param>
+		protected abstract void SetBalance(decimal balance);  //protected here to only expose it in implementation classes and not external objects with reference to it.
 
         /// <summary>
         /// Deposits funds into an account
@@ -75,32 +56,56 @@ namespace BankProject.Accounts
             SetBalance(Balance + depositAmount);
         }
 
-        /// <summary>
-        /// If business rules are met, withdrawal the amount from the account.
-        /// </summary>
-        /// <param name="withdrawalAmount">The amount to attempt to withdrawal.</param>
-        /// <returns>Indication of successful withdrawal</returns>
-        public virtual WithdrawalStatus Withdrawal(decimal withdrawalAmount)
+		/// <summary>
+		/// Transfers funds from this account to another account.
+		/// </summary>
+		/// <param name="toAccount">Account to transfer to.</param>
+		/// <param name="amount">Ammount to transfer</param>
+		/// <returns>Indication if transfer was successful.</returns>
+		public TransactionStatus Transfer(IAccount toAccount, decimal amount)
+		{
+			var status = Withdrawal(amount);
+			if (status.WithdrawalSucceeded)
+			{
+				toAccount.Deposit(amount);
+
+				return new TransactionStatus(true);
+			}
+
+			return new TransactionStatus(false, status.FailureReason);
+		}
+
+		/// <summary>
+		/// If business rules are met, withdrawal the amount from the account.
+		/// </summary>
+		/// <param name="withdrawalAmount">The amount to attempt to withdrawal.</param>
+		/// <returns>Indication of successful withdrawal</returns>
+		public virtual WithdrawalStatus Withdrawal(decimal withdrawalAmount)
 		{
 			decimal expectedBalance = Balance - withdrawalAmount;
-			if (expectedBalance < 0)
+			if (expectedBalance >= 0)
 			{
 				SetBalance(expectedBalance);				
 				return new WithdrawalStatus(true, null);
 			}
 
+			//Balance would be less than 0 so need to do overdraft logic
 			return ProcessOverdraftWidthrawal(withdrawalAmount, expectedBalance);
 		}
-
-
+		
 		//Private method to reduce cyclomatic complexity of Withdrawal function.
 		private WithdrawalStatus ProcessOverdraftWidthrawal(decimal withdrawalAmount, decimal expectedBalance)
 		{
+			//Here Use of account rules rather than pushing down to concrete implementations allows us to switch out
+			//rules quickly if they change without havint to rewrite core withdrawal code in each concrete class
 			if (AccountRules.ShouldAllowOverdrafts)
 			{
 				if (WontExceedOverdraftAllowance(expectedBalance))
 				{
+					//Keep a running total of overdrafts as the instructions indicated could allow up to $1000 in overdrafts
 					Overdrafts.Add(Balance - expectedBalance);
+
+					//Charge the overdraft
 					SetBalance(expectedBalance - AccountRules.OverdraftFee);
 					return new WithdrawalStatus(true, null);
 				}
@@ -121,26 +126,6 @@ namespace BankProject.Accounts
 		private bool WontExceedOverdraftAllowance(decimal expectedBalance)
 		{
 			return Balance - expectedBalance - Overdrafts.Sum() <= AccountRules.OverdraftAllowance;
-		}
-
-				
-		/// <summary>
-		/// Transfers funds from this account to another account.
-		/// </summary>
-		/// <param name="toAccount">Account to transfer to.</param>
-		/// <param name="amount">Ammount to transfer</param>
-		/// <returns>Indication if transfer was successful.</returns>
-		public TransactionStatus Transfer(IAccount toAccount, decimal amount)
-        {
-            var status = Withdrawal(amount);
-            if (status.WithdrawalSucceeded)
-            {
-                toAccount.Deposit(amount);
-				
-                return new TransactionStatus(){ TransactionSucceeded = true };
-            }
-
-            return new TransactionStatus() { TransactionSucceeded = false, Error = status.FailureReason};
-        }
+		}		
     }
 }
