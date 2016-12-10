@@ -10,7 +10,7 @@ namespace BankProject.Transaction
 	public class TransactionProcessor : ITransactionProcessor
 	{
 		/// <summary>
-		/// The Transactions to be processed.
+		/// The transactions.
 		/// </summary>
 		public IList<ITransaction> Transactions { get; set; }
 
@@ -33,12 +33,14 @@ namespace BankProject.Transaction
 		/// <summary>
 		/// Processes all transactions.
 		/// </summary>
-		public void ProcessTransactions()
+		/// <returns>An IList of transactions that have been processed.</returns>
+		public IList<ITransaction> ProcessTransactions()
 		{
 			foreach (ITransaction transaction in Transactions.Where(t=>t.IsTransactable))
 			{
 				Transact(transaction);
 			}
+			return Transactions;
 		}
 
 		private void Transact(ITransaction transaction)

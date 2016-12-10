@@ -121,15 +121,21 @@ namespace BankProject.Accounts
 				else
 				{
 					return new WithdrawalStatus(false,
-						string.Format("Balance of ${0}. Withdrawal limit of ${1} would exceed overdraft limit of {2}",
-							Balance, withdrawalAmount, AccountRules.OverdraftAllowance));
+						string.Format("Balance of ${0}. Withdrawal limit of ${1} would exceed overdraft limit of {2} for {3} of account type {4}",
+							Balance, withdrawalAmount, AccountRules.OverdraftAllowance, AccountOwner, GetAccountType()));
 				}
 			}
 			else
 			{
 				return new WithdrawalStatus(false,
-					string.Format("Balance of ${0}. Not enough funds to withdrawal ${1}", Balance, withdrawalAmount));
+					string.Format("Balance of ${0}. Not enough funds to withdrawal ${1} for {2} of account type {3}", 
+							Balance, withdrawalAmount, AccountOwner, GetAccountType()));
 			}
+		}
+
+		private string GetAccountType()
+		{
+			return this is BusinessAccount ? "Business" : "Personal";
 		}
 
 		private void AddToAccumulatedOverdraft(decimal withdrawalAmount)

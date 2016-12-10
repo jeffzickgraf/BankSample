@@ -7,10 +7,11 @@ using BankProject.Accounts.AccountRules;
 
 namespace BankProjectTests.IntegrationTests
 {
-	[TestClass]
+	//[TestClass]
 	public class AccountRecorderIntegrationTests
 	{
-		[TestMethod]
+		//commenting out test attributes so doesn't execute as needs human inspection and a folder location to place file.
+		//[TestMethod]
 		public void ShouldCreateAccountRecordFile()
 		{
 			IAccount businessAccount = new BusinessAccount(7, "Jeff Business", 100.00m, new BusinessAccountTransactionRules());

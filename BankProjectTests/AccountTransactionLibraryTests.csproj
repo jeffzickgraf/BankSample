@@ -71,9 +71,9 @@
     <Compile Include="TransactionProcessorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankProject\BankProject.csproj">
+    <ProjectReference Include="..\BankProject\AccountTransactionLibrary.csproj">
       <Project>{8e773088-3d41-42f9-8264-14c89dc06871}</Project>
-      <Name>BankProject</Name>
+      <Name>AccountTransactionLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

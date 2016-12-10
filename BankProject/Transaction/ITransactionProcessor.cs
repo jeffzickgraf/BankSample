@@ -21,6 +21,7 @@ namespace BankProject.Transaction
 		/// <summary>
 		/// Processes all transactions.
 		/// </summary>
-		void ProcessTransactions();
+		/// <returns>An IList of transactions that have been processed.</returns>
+		IList<ITransaction> ProcessTransactions();
 	}
 }
