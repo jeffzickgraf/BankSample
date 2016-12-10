@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace BankProject.Output
 {
 	/// <summary>
-	/// Remove line endings from a string.
+	/// Extensions that can assist output of errors.
 	/// </summary>
-	public static class LineEndingRemovalExtension
+	public static class ErrorOutputExtensions
 	{
 		/// <summary>
 		/// Remove line endings from string.
@@ -28,6 +28,16 @@ namespace BankProject.Output
 				.Replace("\r\n", string.Empty).Replace("\n", string.Empty)
 				.Replace("\r", string.Empty)
 				.Replace(lineSeparator, string.Empty).Replace(paragraphSeparator, string.Empty);
+		}
+
+		public static string ReplaceCommasForCSV(this string value)
+		{
+			if (String.IsNullOrEmpty(value))
+			{
+				return value;
+			}
+
+			return value.Replace(',', '|');
 		}
 	}
 }

@@ -7,8 +7,7 @@ using System.Collections.Generic;
 namespace BankProjectTests
 {
 	/*
-	---Note: would normally use a mocking framework like Moq to mock out interfaces
-				to ensure isolation of code but these are pretty simple tests 
+	---Note: see ReadMe
 	*/
 	[TestClass]
 	public class TransactionProcessorTests

@@ -8,7 +8,7 @@ using System.Reflection;
 namespace BankProjectTests
 {
 	[TestClass]
-	public class AccountLoaderTests
+	public class AccountLoaderIntegrationTests
 	{
 		/*
 		More of an integration test since this depends on outside files.

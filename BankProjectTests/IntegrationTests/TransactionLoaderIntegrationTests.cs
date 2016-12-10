@@ -13,7 +13,7 @@ namespace BankProjectTests
 	More of an integration test since this depends on outside files.
 	*/
 	[TestClass]
-	public class TransactionLoaderTests
+	public class TransactionLoaderIntegrationTests
 	{	
 		[TestMethod]
 		public void ShouldLoadTransactions()

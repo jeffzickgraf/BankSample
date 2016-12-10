@@ -5,19 +5,6 @@ using BankProject.Accounts.AccountRules;
 
 namespace BankProjectTests
 {
-	/*
-	 *Guys - these aren't exhaustive tests, but I think they will give you the idea I know how to unit test
-	 * 
-	 * Ideally in a larger application we would be using dependency injection so that it would be easy to
-	 * isolate specific code under test by using a mocking framework since we could inject mocks in as our dependencies
-	 * to control code flow with our fake implementations of interfaces and abstract classes. 
-	 * 
-	 * 
-	 * Would probably also create base classes or helper methods or constants for provided values so we could be DRY but wanted to leave these
-	 * simple for readability and get you back the sample as soon as possible.
-	 */
-
-
 	[TestClass]
 	public class AccountFactoryTests
 	{

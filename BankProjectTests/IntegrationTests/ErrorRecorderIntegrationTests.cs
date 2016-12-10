@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Reflection;
@@ -14,10 +12,11 @@ namespace BankProjectTests.IntegrationTests
 	/// <summary>
 	/// Summary description for ErrorRecorderTests
 	/// </summary>
-	[TestClass]
-	public class ErrorRecorderTests
-	{		
-		[TestMethod]
+	//[TestClass]
+	public class ErrorRecorderIntegrationTests
+	{
+		//commenting out test attributes so doesn't execute as needs human inspection and a folder location to place file.
+		//[TestMethod]
 		public void ShouldCreateTestErrorFile()
 		{
 			IList<ITransaction> failedTransactions = GetSomeFailedTransactions();

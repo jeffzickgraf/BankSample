@@ -10,7 +10,7 @@ using System.Linq;
 namespace BankProjectTests.IntegrationTests
 {
 	[TestClass]
-	public class TransactionProcessorTests
+	public class TransactionProcessorIntegrationTests
 	{
 		[TestMethod]
 		public void ShouldProcessTransactions()

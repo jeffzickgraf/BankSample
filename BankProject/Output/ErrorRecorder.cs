@@ -67,7 +67,7 @@ namespace BankProject.Output
 			{
 				var appErrorLine = string.Format("{0}, {1}, {2}",
 									"ApplicationError",
-									appError.RemoveLineEndings(),
+									appError.RemoveLineEndings().ReplaceCommasForCSV(),
 									string.Empty
 				);
 				sw.WriteLine(appErrorLine);
@@ -82,7 +82,7 @@ namespace BankProject.Output
 									"TransactionError",
 									failedTransaction.TransactionStatus.Error.RemoveLineEndings(),
 									//escape commas in our account loaded data so we don't blow up csv file
-									String.Format("\"{0}\"", failedTransaction.TransactionString)
+									failedTransaction.TransactionString.ReplaceCommasForCSV()
 				);
 				sw.WriteLine(transactionFailLine);
 			}
@@ -96,7 +96,7 @@ namespace BankProject.Output
 									"AccountLoadError",
 									accountLoadError.Error.RemoveLineEndings(),
 									//escape commas in our account loaded data so we don't blow up csv file
-									String.Format("\"{0}\"", accountLoadError.AccountRowData)
+									 accountLoadError.AccountRowData.ReplaceCommasForCSV()
 				);
 				sw.WriteLine(accountLine);
 			}

@@ -1,6 +1,7 @@
 ﻿using BankProject.Accounts;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace BankProject.Output
 {
@@ -10,7 +11,7 @@ namespace BankProject.Output
 	public class AccountRecorder
 	{
 		string _pathToRecordTo;
-		IList<IAccount> _accounts;
+				
 		/// <summary>
 		/// Instantiates an instance of the AccountRecorder.
 		/// </summary>
@@ -19,9 +20,13 @@ namespace BankProject.Output
 		public AccountRecorder(string pathToRecordTo, IList<IAccount> accounts)
 		{
 			_pathToRecordTo = pathToRecordTo;
-			_accounts = accounts;
+
+			//Instructions note we need to output from least to greatest in numeric order
+			Accounts = accounts.OrderBy(o=>o.AccountNumber).ToList();
 		}
-		
+
+		public IList<IAccount> Accounts { get; set; }
+
 		/// <summary>
 		/// Records the account data to a file.
 		/// </summary>
@@ -32,7 +37,7 @@ namespace BankProject.Output
 
 			using (StreamWriter sw = File.AppendText(_pathToRecordTo))
 			{
-				foreach (IAccount account in _accounts)
+				foreach (IAccount account in Accounts)
 				{
 					var accountLine = string.Format("{0}, {1}, {2}, {3}",
 										account.AccountNumber,
