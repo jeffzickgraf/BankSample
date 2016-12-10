@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BankProject.Transaction;
 using BankProject.Accounts;
 using BankProject.Accounts.AccountRules;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BankProjectTests
 {

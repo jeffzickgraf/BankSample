@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AccountFactoryTests.cs" />
     <Compile Include="IntegrationTests\AccountLoaderTests.cs" />
+    <Compile Include="IntegrationTests\ErrorRecorderTests.cs" />
     <Compile Include="IntegrationTests\TransactionProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IntegrationTests\TransactionLoaderTests.cs" />
