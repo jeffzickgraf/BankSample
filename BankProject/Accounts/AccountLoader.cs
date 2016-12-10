@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankProject.Accounts
 {
@@ -38,10 +36,10 @@ namespace BankProject.Accounts
 
 				var accountInitRow = String.Join(",", item);
 
-				bool accountNumberValid = int.TryParse(item[0], out accountNumber);
-				accountOwner = item[1];
-				bool balanceValid = decimal.TryParse(item[2], out initialBalance);
-				accountType = item[3];
+				bool accountNumberValid = int.TryParse(item[0].Trim(), out accountNumber);
+				accountOwner = item[1].Trim();
+				bool balanceValid = decimal.TryParse(item[2].Trim(), out initialBalance);
+				accountType = item[3].Trim();
 
 				if (!accountNumberValid)
 					errorMessage += string.Format("Account number {0} not valid. ", item[0]);

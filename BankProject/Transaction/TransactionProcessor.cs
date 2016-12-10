@@ -47,9 +47,9 @@ namespace BankProject.Transaction
 				= transaction.SourceAccount.Transfer(transaction.DestinationAccount, transaction.TransactionAmount);
 			
 			//If our rules indicate there should be a transaction fee, charge it
-			if (transaction.SourceAccount.AccountRules.ShouldChargeTransactionFee)
+			if (transaction.TransactionStatus.TransactionSucceeded && transaction.SourceAccount.AccountRules.ShouldChargeTransactionFee)
 			{
-				transaction.SourceAccount.Withdrawal(transaction.SourceAccount.AccountRules.TransactionFee);
+				transaction.SourceAccount.ChargeFee(transaction.SourceAccount.AccountRules.TransactionFee);
 			}
 		}
 	}

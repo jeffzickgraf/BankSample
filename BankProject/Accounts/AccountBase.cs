@@ -76,6 +76,15 @@ namespace BankProject.Accounts
 		}
 
 		/// <summary>
+		/// Deducts a fee from the accounts balance.
+		/// </summary>
+		/// <param name="fee">The feee to charge</param>		
+		public void ChargeFee(decimal fee)
+		{
+			SetBalance(Balance - fee);
+		}
+
+		/// <summary>
 		/// If business rules are met, withdrawal the amount from the account.
 		/// </summary>
 		/// <param name="withdrawalAmount">The amount to attempt to withdrawal.</param>
@@ -100,12 +109,12 @@ namespace BankProject.Accounts
 			//rules quickly if they change without havint to rewrite core withdrawal code in each concrete class
 			if (AccountRules.ShouldAllowOverdrafts)
 			{
-				if (WontExceedOverdraftAllowance(expectedBalance))
+				if (WontExceedOverdraftAllowance(withdrawalAmount))
 				{
 					//Keep a running total of overdrafts as the instructions indicated could allow up to $1000 in overdrafts
-					Overdrafts.Add(Balance - expectedBalance);
+					AddToAccumulatedOverdraft(withdrawalAmount);
 
-					//Charge the overdraft
+					//Set to expected balance and charge the overdraft fee
 					SetBalance(expectedBalance - AccountRules.OverdraftFee);
 					return new WithdrawalStatus(true, null);
 				}
@@ -123,9 +132,33 @@ namespace BankProject.Accounts
 			}
 		}
 
-		private bool WontExceedOverdraftAllowance(decimal expectedBalance)
+		private void AddToAccumulatedOverdraft(decimal withdrawalAmount)
 		{
-			return Balance - expectedBalance - Overdrafts.Sum() <= AccountRules.OverdraftAllowance;
+			if (Balance > 0)
+			{
+				//Example: $100 withdrawal - $5 Balance = $95 overage
+				Overdrafts.Add(withdrawalAmount - Balance);
+			}
+			else
+			{
+				Overdrafts.Add(withdrawalAmount);
+			}
+			
+		}
+
+		private bool WontExceedOverdraftAllowance(decimal withdrawalAmount)
+		{
+			if (Balance > 0)
+			{
+				//example: $5 - $100 >= -1 * $1000
+				return Balance - withdrawalAmount >= -1 * AccountRules.OverdraftAllowance;
+			}
+			else
+			{
+				//example: $-5 - $100 >= -1 * $1000
+				return Balance - withdrawalAmount - Overdrafts.Sum() >= -1 * AccountRules.OverdraftAllowance;
+			}
+			
 		}		
     }
 }

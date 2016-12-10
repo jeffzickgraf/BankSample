@@ -22,9 +22,9 @@ namespace BankProject.Transaction
 		/// Processess the transactions of the flat file.
 		/// </summary>
 		/// <returns>List of attempted transactions.</returns>
-		public IList<Transaction> TransformTransactions()
+		public IList<ITransaction> TransformTransactions()
 		{
-			IList<Transaction> transactions = new List<Transaction>();
+			IList<ITransaction> transactions = new List<ITransaction>();
 			Transaction transaction;
 
 			var fileLines = File.ReadAllLines(fileLocation).Select(csv => csv.Split(','));
@@ -35,11 +35,11 @@ namespace BankProject.Transaction
 				decimal amount;
 
 				var transactString = String.Join(",", item);
-				var sourceAccount = accounts.FirstOrDefault(sa => sa.AccountNumber.ToString() == item[0]);
-				var destinationAccount = accounts.FirstOrDefault(da => da.AccountNumber.ToString() == item[1]);
+				var sourceAccount = accounts.FirstOrDefault(sa => sa.AccountNumber.ToString() == item[0].Trim());
+				var destinationAccount = accounts.FirstOrDefault(da => da.AccountNumber.ToString() == item[1].Trim());
 
 				
-				bool amountValid = decimal.TryParse(item[2], out amount);
+				bool amountValid = decimal.TryParse(item[2].Trim(), out amount);
 
 				var isValidTransaction = IsValidTransaction(item, sourceAccount, destinationAccount, amountValid, out errorMessage);
 
