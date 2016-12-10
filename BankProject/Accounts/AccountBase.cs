@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BankProject.Transaction;
 using BankProject.Accounts.AccountRules;
@@ -103,6 +102,7 @@ namespace BankProject.Accounts
 		}
 		
 		//Private method to reduce cyclomatic complexity of Withdrawal function.
+		//Still could be better - I hate nested if statements and if had more time would try to reduce
 		private WithdrawalStatus ProcessOverdraftWidthrawal(decimal withdrawalAmount, decimal expectedBalance)
 		{
 			//Here Use of account rules rather than pushing down to concrete implementations allows us to switch out
@@ -121,7 +121,7 @@ namespace BankProject.Accounts
 				else
 				{
 					return new WithdrawalStatus(false,
-						string.Format("Balance of ${0}. Withdrawal limit of ${1} would exceed overdraft limit of {2} for {3} of account type {4}",
+						string.Format("Balance of ${0}. Withdrawal of ${1} would exceed overdraft limit of ${2} for {3} of account type {4}",
 							Balance, withdrawalAmount, AccountRules.OverdraftAllowance, AccountOwner, GetAccountType()));
 				}
 			}

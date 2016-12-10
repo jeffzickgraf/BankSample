@@ -1,17 +1,12 @@
 ﻿using BankProject.Accounts.AccountRules;
-using BankProject.Transaction;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankProject.Accounts
 {
-    /// <summary>
-    /// Represents a personal account.
-    /// </summary>
-    public class PersonalAccount : AccountBase
+	/// <summary>
+	/// Represents a personal account.
+	/// </summary>
+	public class PersonalAccount : AccountBase
     {
         private decimal _balance;
         

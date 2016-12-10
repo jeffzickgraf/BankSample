@@ -13,10 +13,29 @@ namespace BankProject.Accounts.AccountRules
     /// </summary>
     public interface ITransactionAccountRules
     {
+		/// <summary>
+		/// Inidicates if a transaction fee should be charged.
+		/// </summary>
        bool ShouldChargeTransactionFee { get; }
+		
+		/// <summary>
+		/// Gets transaction fee if applicable.
+		/// </summary>
 	   decimal TransactionFee { get; }
+
+		/// <summary>
+		/// Indicates if the account should allow overdrafting.
+		/// </summary>
        bool ShouldAllowOverdrafts { get; }
+
+		/// <summary>
+		/// Gets the overdraft fee if applicable.
+		/// </summary>
        decimal OverdraftFee { get; }
+
+		/// <summary>
+		/// Gets the overdraft allowance if applicable.
+		/// </summary>
        decimal OverdraftAllowance { get; }
     }
 }

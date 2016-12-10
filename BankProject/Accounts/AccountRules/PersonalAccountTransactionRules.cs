@@ -2,28 +2,46 @@
 
 namespace BankProject.Accounts.AccountRules
 {
+	/// <summary>
+	/// Transaction rules for Personal Accounts.
+	/// </summary>
 	public class PersonalAccountTransactionRules : ITransactionAccountRules
     {
-        public bool ShouldChargeTransactionFee
+		/// <summary>
+		/// Inidicates if a transaction fee should be charged.
+		/// </summary>
+		public bool ShouldChargeTransactionFee
         {
             get { return false; }
         }
 
-        public bool ShouldAllowOverdrafts
+		/// <summary>
+		/// Indicates if the account should allow overdrafting.
+		/// </summary>
+		public bool ShouldAllowOverdrafts
         {
             get { return false; }
         }
 
-        public decimal OverdraftFee
+		/// <summary>
+		/// Gets the overdraft fee if applicable.
+		/// </summary>
+		public decimal OverdraftFee
         {
             get { throw new NotImplementedException(); }
         }
 
-        public decimal OverdraftAllowance
+		/// <summary>
+		/// Gets the overdraft allowance if applicable.
+		/// </summary>
+		public decimal OverdraftAllowance
         {
             get { throw new NotImplementedException(); }
         }
 
+		/// <summary>
+		/// Gets transaction fee if applicable.
+		/// </summary>
 		public decimal TransactionFee
 		{
 			get	{throw new NotImplementedException(); }

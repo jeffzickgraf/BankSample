@@ -11,7 +11,10 @@ namespace BankProject.Accounts.AccountRules
     /// </summary>
     public class BusinessAccountTransactionRules : ITransactionAccountRules
     {
-        public bool ShouldChargeTransactionFee
+		/// <summary>
+		/// Inidicates if a transaction fee should be charged.
+		/// </summary>
+		public bool ShouldChargeTransactionFee
         {
             get
             {
@@ -19,7 +22,10 @@ namespace BankProject.Accounts.AccountRules
             }          
         }
 
-        public bool ShouldAllowOverdrafts
+		/// <summary>
+		/// Indicates if the account should allow overdrafting.
+		/// </summary>
+		public bool ShouldAllowOverdrafts
         {
             get
             {
@@ -27,7 +33,10 @@ namespace BankProject.Accounts.AccountRules
             }
         }
 
-        public decimal OverdraftFee
+		/// <summary>
+		/// Gets the overdraft fee if applicable.
+		/// </summary>
+		public decimal OverdraftFee
         {
             get
             {
@@ -35,7 +44,10 @@ namespace BankProject.Accounts.AccountRules
             }
         }
 
-        public decimal OverdraftAllowance
+		/// <summary>
+		/// Gets the overdraft allowance if applicable.
+		/// </summary>
+		public decimal OverdraftAllowance
         {
             get
             {
@@ -43,6 +55,9 @@ namespace BankProject.Accounts.AccountRules
             }
         }
 
+		/// <summary>
+		/// Gets transaction fee if applicable.
+		/// </summary>
 		public decimal TransactionFee
 		{
 			get

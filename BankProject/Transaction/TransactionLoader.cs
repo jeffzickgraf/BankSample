@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace BankProject.Transaction
 {
+	/// <summary>
+	/// Loads transactions into the system.
+	/// </summary>
 	public class TransactionLoader
 	{
 		string fileLocation;

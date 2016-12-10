@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace BankProject.Accounts
 {
+	/// <summary>
+	/// Loads accounts and initializes their balance.
+	/// </summary>
 	public class AccountLoader
 	{
 		string fileLocation;		
